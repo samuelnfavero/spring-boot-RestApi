@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="save.js"></script>
+    <script src="delete.js"></script>
+    <script src="readAll.js"></script>
+    <script src="findByName.js"></script>
+</head>
+<style>
+    li{
+        list-style: none;
+    }
+    button{
+        margin:10px;
+    }
+</style>
+<body>
+<h1>Cadastro Usuário</h1>
+
+<form>
+    <div class="form-group">
+      <label for="id">ID</label>
+      <input type="text" class="form-control" id="id" readonly>
+    </div>
+    <div class="form-group">
+        <label for="name">Nome</label>
+        <input type="text" class="form-control" id="name" placeholder="Digite seu nome...">
+    </div>
+    <div class="form-group">
+        <label for="age">Idade</label>
+        <input type="number" class="form-control" id="age" placeholder="Digite sua idade...">
+    </div>
+    <button type="button" class="btn btn-primary" id="buttonSubmit" >Enviar</button>
+    <button type="button" class="btn btn-success" id="buttonClear" >Novo</button>
+    <button type="button" class="btn btn-danger" id='buttonDelete' >Delete</button>
+    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Pesquisar</button>
+  </form>
+  
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Pesquisar usuário</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Digite o nome:</label>
+              <input type="text" class="form-control" id="userName">
+            </div>
+          </form>
+          
+          
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Idade</th>
+                <th scope="col"></th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+          <button type="button" class="btn btn-primary" onclick="readAll()">Mostrar todos</button>
+          <button type="button" class="btn btn-primary" onclick="findByName()">Pesquisar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="showAll"></div>
+  
+  <script>
+    const buttonSend = document.querySelector('#buttonSubmit')
+    buttonSend.addEventListener("click", function(event){
+      event.preventDefault;
+      save();
+      alertRegister();
+    })
+    
+  const buttonClear = document.querySelector('#buttonClear')
+  buttonClear.addEventListener("click", function(){
+    clearInputs()
+  })
+
+  const buttonDelete = document.querySelector('#buttonDelete')
+  buttonDelete.addEventListener("click", function(){
+    deleteById();
+    alertDelete();
+    clearInputs();
+  })
+
+  function clearInputs(){
+    document.querySelector('#id').value = '';
+    document.querySelector("#name").value = '';
+    document.querySelector("#age").value = '';
+  }
+
+  function alertRegister(){
+    alert(
+      "Cadastro realizado!"+
+    "\nNome: " + document.querySelector("#name").value +
+    "\nIdade: " + document.querySelector("#age").value
+    )
+  }
+
+  function alertDelete(){
+    const id = document.querySelector('#id').value
+    const name = document.querySelector("#name").value
+
+    alert("Usuário " + name + " de Id " + id + " foi deletado!")
+  }
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
